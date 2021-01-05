@@ -1,9 +1,9 @@
-#Towny Holograms
-######A Spigot Minecraft plugin that gives town mayors/members access to create and manage holograms specifically inside their town.
+# Towny Holograms
+###### A Spigot Minecraft plugin that gives town mayors/members access to create and manage holograms specifically inside their town.
 
 ---
 
-##About the Plugin
+## About the Plugin
 
 
 
@@ -13,11 +13,11 @@ This plugin requires:
 
 ---
 
-##Commands and Permissions
+## Commands and Permissions
 
 Permissions are made for each command so that server admins can easily pick and choose what town ranks have access to each permissions.
 
-####General Permissions
+#### General Permissions
 
 | Command                                              | Description                                | Permission                    |
 | -----------------------------------------------------|:------------------------------------------:| -----------------------------:|
@@ -35,7 +35,7 @@ Permissions are made for each command so that server admins can easily pick and 
 
 
 
-####Admin Permissions
+#### Admin Permissions
 
 Admins have seperate permission nodes to be able to modify other towns holograms.
 
@@ -46,7 +46,7 @@ Admins have seperate permission nodes to be able to modify other towns holograms
 
 ---
 
-##Versions & Footnotes
+## Versions & Footnotes
 
 This project was created based on [Spigot-1.16.4 Server](https://getbukkit.org/get/MvbtKzCMFRVUPyKHvZ0cmiThXiiTSe92) using [Holographic Displays X](X) and [Towny X](X)
 
