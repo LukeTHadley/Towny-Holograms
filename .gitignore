@@ -2,7 +2,7 @@
 *.iml
 *.java___jb_tmp___
 .idea/
-
+/target
 
 # OS X
 .DS_Store
