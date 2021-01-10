@@ -53,17 +53,27 @@ public class move extends SubCommand {
             return;
         }
 
-        if (args[1].equalsIgnoreCase("here")){
 
-            x = player.getLocation().getX();
-            y = player.getLocation().getY();
-            z = player.getLocation().getZ();
+        if (args.length == 2){
+            if (args[1].equalsIgnoreCase("here")){
 
+                x = player.getLocation().getX();
+                y = player.getLocation().getY();
+                z = player.getLocation().getZ();
+            }
+            else {
+                sender.sendMessage(Strings.DISPLAY_PREFIX + "1 Usage: /" + label + " " + getName() + " " + getPossibleArguments());;
+                return;
+            }
         }
-        else {
+        else if (args.length == 4){
             x = Double.parseDouble(args[1]);
             y = Double.parseDouble(args[2]);
             z = Double.parseDouble(args[3]);
+        }
+        else {
+            sender.sendMessage(Strings.DISPLAY_PREFIX + "2 Usage: /" + label + " " + getName() + " " + getPossibleArguments());;
+            return;
         }
 
         Location newLocation = new Location(player.getWorld(), x, y, z);
@@ -90,7 +100,7 @@ public class move extends SubCommand {
                     return;
 
                 } else {
-                    sender.sendMessage(Strings.DISPLAY_PREFIX + " You can only move a hologram to a location in your town, not the another town.");
+                    sender.sendMessage(Strings.DISPLAY_PREFIX + " You can only move a hologram to a location in your town, not another town.");
                     return;
                 }
             } else {
@@ -107,7 +117,7 @@ public class move extends SubCommand {
             return;
         }
         catch (ArrayIndexOutOfBoundsException e){
-            sender.sendMessage(Strings.DISPLAY_PREFIX + " Usage: /" + label + " " + getName() + " " + getPossibleArguments());
+            sender.sendMessage(Strings.DISPLAY_PREFIX + "DDDD Usage: /" + label + " " + getName() + " " + getPossibleArguments());
             return;
         }
     }

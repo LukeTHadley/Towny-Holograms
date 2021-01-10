@@ -6,6 +6,10 @@ import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection;
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Town;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandException;
@@ -33,9 +37,14 @@ public class info extends SubCommand {
     @Override
     public void execute(TownyHolograms plugin, CommandSender sender, String label, String[] args, ConfigValues configValues, DatabaseConnection databaseConnection) throws CommandException {
 
+        try {
+
         String hologramName = args[0];
         Player player = (Player) sender;
         HologramItem hologram = databaseConnection.getHologram(hologramName, plugin.getTownFromPlayer(player).getUuid().toString());
+
+        Resident resident = TownyAPI.getInstance().getDataSource().getResident(player.getName());
+        Town town = TownyAPI.getInstance().getTownBlock(player.getLocation()).getTown();
 
         if (hologram == null){
             sender.sendMessage(Strings.DISPLAY_PREFIX + " A hologram with the name '" + hologramName + "' does not exists!");
@@ -43,7 +52,7 @@ public class info extends SubCommand {
         }
             sender.sendMessage(ChatColor.GOLD + ".oOo.___________.[" + ChatColor.YELLOW + " Hologram Information " + ChatColor.GOLD + "].___________.oOo.");
             sender.sendMessage(" " + ChatColor.DARK_GREEN + "Name: " + ChatColor.GREEN + hologram.getName());
-            sender.sendMessage(" " + ChatColor.DARK_GREEN + "Town: " + ChatColor.GREEN + hologram.getTown());
+            sender.sendMessage(" " + ChatColor.DARK_GREEN + "Town: " + ChatColor.GREEN + town.getName());
             sender.sendMessage(" " + ChatColor.DARK_GREEN + "World Name: " + ChatColor.GREEN + hologram.getLocation().getWorld().getName());
             sender.sendMessage(" " + ChatColor.DARK_GREEN + "X: " + ChatColor.GREEN + hologram.getLocation().getX());
             sender.sendMessage(" " + ChatColor.DARK_GREEN + "Y: " + ChatColor.GREEN + hologram.getLocation().getY());
@@ -95,7 +104,12 @@ public class info extends SubCommand {
         player.spigot().sendMessage(footer);
 
 
+    }
 
+
+         catch (NotRegisteredException exception) {
+            exception.printStackTrace();
+        }
 
         /*
 

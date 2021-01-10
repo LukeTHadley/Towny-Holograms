@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 public class prices extends SubCommand {
 
     public prices(){
-        super("prices", "Shows the prices and levels of holograms.");
+        super("prices", "Shows the prices and levels of holograms.", new String[]{"guide", "wiki"});
         setPermission(Strings.REGULAR_PERM + "prices");
     }
 

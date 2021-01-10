@@ -12,7 +12,7 @@ The cost of each hologram can be modified in the `config.yml` as well as how man
 
 Holograms are removed and deleted when a town falls.
 Holograms can be cleared in an individual plot on `/plot clear` towny event.
-Holograms are automatically cleared 
+Holograms are automatically cleared
 
 
 ### Dependencies
@@ -109,3 +109,10 @@ This project was created based on [Spigot-1.16.4 Server](https://getbukkit.org/g
 
 
 I have no affiliation with the creators of Towny or the creators of Holographic Displays
+
+
+## ToDo
+
+A line limit
+Price to add a line to a hologram
+Hologram Tax per townyday

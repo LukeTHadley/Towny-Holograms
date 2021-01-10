@@ -66,11 +66,17 @@ public class addline extends SubCommand {
 
                 hologramItems.get(counter).addLine(formattedHologramText);
                 databaseConnection.updateContent(hologramItems.get(counter).linesToString(), hologramName, plugin.getTownFromPlayer(player).getUuid().toString());
-            }
-        }
-        counter++;
 
-        plugin.holograms.replace(hologram.getTownUUID(), hologramItems);
+
+                sender.sendMessage(Strings.DISPLAY_PREFIX + " The content of hologram '" + hologramName + "' was updated!");
+                plugin.holograms.replace(hologram.getTownUUID(), hologramItems);
+                return;
+
+
+            }
+            counter++;
+        }
+
 
     }
 }

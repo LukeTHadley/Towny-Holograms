@@ -75,15 +75,15 @@ public class CommandHandler implements TabExecutor {
                 if (subCommand.isValidTrigger(args[0])) {
 
 
-                    if (!subCommand.hasPermission(sender)) {
-                        sender.sendMessage(Strings.DISPLAY_PREFIX + " You don't have permission.");
-                        return true;
-                    }
-
                     try {
                         Resident resident = TownyAPI.getInstance().getDataSource().getResident(player.getName());
                         if (!resident.hasTown()) { //Player doesn't have a town
                             sender.sendMessage(Strings.DISPLAY_PREFIX + " You must belong to a town to use that command.");
+                            return true;
+                        }
+
+                        if (!subCommand.hasPermission(sender)) {
+                            sender.sendMessage(Strings.DISPLAY_PREFIX + " You don't have permission.");
                             return true;
                         }
 
