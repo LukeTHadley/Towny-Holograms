@@ -191,6 +191,16 @@ public final class TownyHolograms extends JavaPlugin {
         return counter;
     }
 
+    public HologramAllowance getHologramAllowance(Town town){
+            HologramAllowance closest = new HologramAllowance(0, 0);
+            for (HologramAllowance allowance : prices){
+                if (allowance.getNumberOfResidents() <= town.getNumResidents() && allowance.getNumberOfResidents() > closest.getNumberOfResidents()){
+                    closest = allowance;
+                }
+            }
+            return closest;
+    }
+
 
 
 

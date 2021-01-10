@@ -19,6 +19,8 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+
 public class create extends SubCommand {
 
     public create(){
@@ -62,12 +64,27 @@ public class create extends SubCommand {
                     town.getAccount().withdraw(configValues.getNewHologramPrice(), "TownyHologram - Creation of hologram " + hologramName);
 
 
-                    HologramItem getHologram = databaseConnection.getHologram(hologramName, "TOWN");
+                    HologramItem getHologram = databaseConnection.getHologram(hologramName, town.getUuid().toString());
 
                     if (getHologram != null) {
                         sender.sendMessage(Strings.DISPLAY_PREFIX + " A hologram with the name '" + hologramName + "' already exists!");
                         return;
                     }
+
+
+                    ArrayList<HologramItem> items = plugin.holograms.get(town.getUuid());
+                    int hologramCount;
+                    if (items == null){
+                        hologramCount = 0;
+                    } else {
+                        hologramCount = items.size();
+                    }
+                    
+                    if (hologramCount >= plugin.getHologramAllowance(town).getNumberOfHolograms()){
+                        sender.sendMessage(Strings.DISPLAY_PREFIX + " You can't have any more holograms at your current town size.");
+                        return;
+                    }
+
 
 
                     String hologramText = ChatColor.AQUA + "New Hologram!";
@@ -104,12 +121,10 @@ public class create extends SubCommand {
 
 
 
-        } catch (NotRegisteredException e) {// I DONT LIKE THIS
-            sender.sendMessage(Strings.DISPLAY_PREFIX + " You can't make a hologram in another players town.");
-            return;
+        } catch (NotRegisteredException e) {// I DON'T LIKE THIS
+            e.printStackTrace();
         } catch (NullPointerException e){
-            sender.sendMessage(Strings.DISPLAY_PREFIX + " You can't make a hologram in another players town.");
-            return;
+            e.printStackTrace();
         } catch (EconomyException e) {
             e.printStackTrace();
         }

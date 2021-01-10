@@ -6,9 +6,12 @@ import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.HologramAllowance;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection;
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class prices extends SubCommand {
 
@@ -48,8 +51,30 @@ public class prices extends SubCommand {
         }
 
 
-        //sender.sendMessage(" " + ChatColor.YELLOW + "[New] " + ChatColor.DARK_GREEN + "Hologram: " + ChatColor.GREEN + configValues.getNewHologramPrice());
 
+
+
+
+        try {
+
+            Player player = (Player) sender;
+            int townResidentCount = TownyAPI.getInstance().getTownBlock(player.getLocation()).getTown().getNumResidents();
+
+            System.out.println(townResidentCount);
+
+            HologramAllowance closest = new HologramAllowance(0, 0);
+            for (HologramAllowance allowance : plugin.prices){
+                System.out.println(allowance.getNumberOfResidents() + " " + closest.getNumberOfResidents());
+                if (allowance.getNumberOfResidents() <= townResidentCount && allowance.getNumberOfResidents() > closest.getNumberOfResidents()){
+                    closest = allowance;
+                }
+            }
+
+            sender.sendMessage(ChatColor.DARK_GREEN + "          Your town is allowed " + ChatColor.GREEN + closest.getNumberOfHolograms() + ChatColor.DARK_GREEN + " holograms.");
+
+        } catch (NotRegisteredException e ){
+            e.printStackTrace();
+        }
 
 
 
