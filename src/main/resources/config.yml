@@ -1,0 +1,24 @@
+
+
+sql-database:
+  host: ""
+  port: 3306
+  database-name: ""
+  username: ""
+  password: ""
+
+
+
+
+test-text: "test"
+
+
+
+
+ClearHologramsOnPlotClear: false
+
+NewHologramPrice: 10000
+
+hologram-allowances:
+  - [1, 2]
+  - [2, 7]

@@ -1,0 +1,17 @@
+name: TownyHolograms
+version: PRE-RELEASE-1.3
+main: com.github.lukethadley.townyholograms.TownyHolograms
+api-version: 1.16
+prefix: Towny-Holograms
+load: POSTWORLD
+depend:  [ Towny, HolographicDisplays ]
+authors: [ Thomas9078 ]
+description: A Spigot Minecraft plugin to be used alongside Towny to allow holograms to be created specifically in towns.
+website: https://github.com/LukeTHadley/Towny-Holograms
+
+commands:
+  townyholograms:
+    aliases:
+      - th
+      - townyhologram
+    description: Interact with Towny Holograms.

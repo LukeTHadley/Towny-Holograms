@@ -30,7 +30,7 @@ Permissions are made for each command so that server admins can easily pick and 
 | `/townyhologram removeline <hologram name> <index>`  | Remove a line from a given hologram        | `townyhologram.commands.removeline` |
 | `/townyhologram setline <hologram name> <index> [text]` | Set the content of an existing line     | `townyhologram.commands.setline` |
 | `/townyhologram insertline <hologram name> <index> [text]` | Insert a line into an existing hologram           | `townyhologram.commands.insertline` |
-| `/townyhologram move <hologram name> here|<X Position> <Y Position> <Z Position>` | Move a hologram to a given position in the town | `townyhologram.commands.move` |
+| `/townyhologram move <hologram name> here/<X Position> <Y Position> <Z Position>` | Move a hologram to a given position in the town | `townyhologram.commands.move` |
 | `/townyhologram help`                                | Show a list of all plugin commands         | `townyhologram.commands.help` |
 
 
