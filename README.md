@@ -114,5 +114,7 @@ I have no affiliation with the creators of Towny or the creators of Holographic 
 ## ToDo
 
 A line limit
+
 Price to add a line to a hologram
+
 Hologram Tax per townyday
