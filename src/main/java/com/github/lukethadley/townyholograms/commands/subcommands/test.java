@@ -44,6 +44,10 @@ public class test extends SubCommand {
             }
             Town town = TownyAPI.getInstance().getTownBlock(player.getLocation()).getTown();
             Resident resident = TownyAPI.getInstance().getDataSource().getResident(player.getName());
+
+
+
+
             if (resident.hasTown()){
                 if (resident.getTown().equals(town)) {
                     System.out.println("THIS IS YOUR TOWN");

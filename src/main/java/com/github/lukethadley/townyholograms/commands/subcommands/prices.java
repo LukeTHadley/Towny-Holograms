@@ -60,11 +60,11 @@ public class prices extends SubCommand {
             Player player = (Player) sender;
             int townResidentCount = TownyAPI.getInstance().getTownBlock(player.getLocation()).getTown().getNumResidents();
 
-            System.out.println(townResidentCount);
+
 
             HologramAllowance closest = new HologramAllowance(0, 0);
             for (HologramAllowance allowance : plugin.prices){
-                System.out.println(allowance.getNumberOfResidents() + " " + closest.getNumberOfResidents());
+
                 if (allowance.getNumberOfResidents() <= townResidentCount && allowance.getNumberOfResidents() > closest.getNumberOfResidents()){
                     closest = allowance;
                 }

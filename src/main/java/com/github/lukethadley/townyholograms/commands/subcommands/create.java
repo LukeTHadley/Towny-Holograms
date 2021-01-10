@@ -79,7 +79,7 @@ public class create extends SubCommand {
                     } else {
                         hologramCount = items.size();
                     }
-                    
+
                     if (hologramCount >= plugin.getHologramAllowance(town).getNumberOfHolograms()){
                         sender.sendMessage(Strings.DISPLAY_PREFIX + " You can't have any more holograms at your current town size.");
                         return;

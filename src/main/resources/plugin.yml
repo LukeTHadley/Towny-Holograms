@@ -15,3 +15,25 @@ commands:
       - th
       - townyhologram
     description: Interact with Towny Holograms.
+
+permissions:
+  townyholograms.*:
+    description: Gives all permissions for TownyHolograms
+    default: op
+    children:
+      townyholograms.commands.*:
+        children:
+          townyholograms.commands.addline: false
+          townyholograms.commands.create: false
+          townyholograms.commands.delete: false
+          townyholograms.commands.help: false
+          townyholograms.commands.info: false
+          townyholograms.commands.insertline: false
+          townyholograms.commands.list: false
+          townyholograms.commands.move: false
+          townyholograms.commands.prices: false
+          townyholograms.commands.removeline: false
+          townyholograms.commands.setline: false
+
+
+

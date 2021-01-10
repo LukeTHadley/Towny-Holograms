@@ -1,5 +1,12 @@
+##########################
+# TownyHolograms
+# @author Thomas9078
+# Config File
+##########################
 
 
+#Add your SQL connection credentials below.
+#The plugin will not enable unless a successful SQL connection is found
 sql-database:
   host: ""
   port: 3306
@@ -7,18 +14,17 @@ sql-database:
   username: ""
   password: ""
 
-
-
-
-test-text: "test"
-
-
-
-
+# Should holograms in a plot be cleared when a user runs '/plot clear'
 ClearHologramsOnPlotClear: false
 
+# The price of a new hologram taken out of the town bank
 NewHologramPrice: 10000
 
+# The number of residents to the number of holograms allowed.
+# [1, 2] - If there is one resident in the town, the town is allowed 2 holograms
+# [2, 7] - If there are 2 residents in the town, the town is allowed 7 holograms...
+# Add more in the format below depending on your server.
 hologram-allowances:
   - [1, 2]
-  - [2, 7]
+  - [2, 3]
+  - [10, 15]
