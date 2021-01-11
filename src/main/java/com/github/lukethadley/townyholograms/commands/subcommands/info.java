@@ -85,7 +85,7 @@ public class info extends SubCommand {
         setLineComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ("/townyhologram setline " + hologramName)));
         setLineComponent.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new ComponentBuilder( "Set a specific line on the hologram to something else" ).create() ) );
 
-        TextComponent moveHereComponent = new TextComponent(ChatColor.DARK_AQUA + " [Move Here]");
+        TextComponent moveHereComponent = new TextComponent(ChatColor.DARK_AQUA + " [Move]");
         moveHereComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ("/townyhologram move " + hologramName)));
         moveHereComponent.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new ComponentBuilder( "Move a hologram to your current position" ).create() ) );
 
