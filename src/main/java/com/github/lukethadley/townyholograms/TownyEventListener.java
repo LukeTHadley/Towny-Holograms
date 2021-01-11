@@ -50,17 +50,15 @@ public class TownyEventListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     private void onTownDeleteEvent(DeleteTownEvent e){
-
         ArrayList<HologramItem> townList = plugin.holograms.get(e.getTownUUID());
-
+        if (townList == null){
+            return;
+        }
         for (HologramItem holo : townList){
             holo.getHologram().delete();
         }
-
         database.removeAllFromTown(e.getTownUUID().toString());
-
         plugin.getLogger().log(Level.INFO, " A town was deleted or fell. " + townList.size() + " holograms were removed.");
-
         townDeleteInProgress = false;
     }
 
@@ -97,11 +95,7 @@ public class TownyEventListener implements Listener {
             }
         }
 
-
-
     }
-
-
 
 }
 
