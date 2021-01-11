@@ -15,6 +15,7 @@ import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -102,11 +103,13 @@ public class create extends SubCommand {
 
                     String formattedHologramText = ChatColor.translateAlternateColorCodes('&', hologramText);
 
+                    Location location = player.getLocation();
+                    location.setY(location.getY()+2);
 
-                    Hologram hologram = HologramsAPI.createHologram(plugin, player.getLocation());
 
-                    HologramItem newHologram = new HologramItem(hologramName, plugin.getTownFromPlayer(player).getUuid().toString(), formattedHologramText, player.getLocation(), hologram);
+                    Hologram hologram = HologramsAPI.createHologram(plugin, location);
 
+                    HologramItem newHologram = new HologramItem(hologramName, plugin.getTownFromPlayer(player).getUuid().toString(), formattedHologramText, location, hologram);
 
                     plugin.addHologram(newHologram);
 

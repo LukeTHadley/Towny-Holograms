@@ -48,7 +48,6 @@ public class list extends SubCommand {
             }
 
             int townResidentCount = TownyAPI.getInstance().getTownBlock(player.getLocation()).getTown().getNumResidents();
-            
             HologramAllowance closest = new HologramAllowance(0, 0);
             for (HologramAllowance allowance : plugin.prices) {
 

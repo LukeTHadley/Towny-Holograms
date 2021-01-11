@@ -58,7 +58,7 @@ public class move extends SubCommand {
             if (args[1].equalsIgnoreCase("here")){
 
                 x = player.getLocation().getX();
-                y = player.getLocation().getY();
+                y = player.getLocation().getY()+2;
                 z = player.getLocation().getZ();
             }
             else {
