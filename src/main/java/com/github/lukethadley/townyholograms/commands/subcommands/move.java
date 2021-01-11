@@ -62,7 +62,7 @@ public class move extends SubCommand {
                 z = player.getLocation().getZ();
             }
             else {
-                sender.sendMessage(Strings.DISPLAY_PREFIX + "1 Usage: /" + label + " " + getName() + " " + getPossibleArguments());;
+                sender.sendMessage(Strings.DISPLAY_PREFIX + " Usage: /" + label + " " + getName() + " " + getPossibleArguments());;
                 return;
             }
         }
@@ -72,7 +72,7 @@ public class move extends SubCommand {
             z = Double.parseDouble(args[3]);
         }
         else {
-            sender.sendMessage(Strings.DISPLAY_PREFIX + "2 Usage: /" + label + " " + getName() + " " + getPossibleArguments());;
+            sender.sendMessage(Strings.DISPLAY_PREFIX + " Usage: /" + label + " " + getName() + " " + getPossibleArguments());;
             return;
         }
 
@@ -117,7 +117,7 @@ public class move extends SubCommand {
             return;
         }
         catch (ArrayIndexOutOfBoundsException e){
-            sender.sendMessage(Strings.DISPLAY_PREFIX + "DDDD Usage: /" + label + " " + getName() + " " + getPossibleArguments());
+            sender.sendMessage(Strings.DISPLAY_PREFIX + " Usage: /" + label + " " + getName() + " " + getPossibleArguments());
             return;
         }
     }
