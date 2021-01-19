@@ -2,6 +2,7 @@ package com.github.lukethadley.townyholograms.commands.subcommands;
 
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
+import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
@@ -12,10 +13,9 @@ import org.bukkit.entity.Player;
 
 public class delete extends SubCommand {
 
-
     public delete() {
         super("delete", "Delete a hologram in your town", new String[]{"remove", "del"});
-        setPermission(Strings.REGULAR_PERM + "delete");
+        setPermission(Permission.DELETE);
     }
 
     @Override

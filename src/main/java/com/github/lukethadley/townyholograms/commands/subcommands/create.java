@@ -2,6 +2,7 @@ package com.github.lukethadley.townyholograms.commands.subcommands;
 
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
+import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
@@ -11,7 +12,6 @@ import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
-import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import org.bukkit.ChatColor;
@@ -26,8 +26,7 @@ public class create extends SubCommand {
 
     public create(){
         super("create", "Make a new hologram in your town", new String[]{"new"});
-
-        setPermission(Strings.REGULAR_PERM + "create");
+        setPermission(Permission.CREATE);
     }
 
     @Override

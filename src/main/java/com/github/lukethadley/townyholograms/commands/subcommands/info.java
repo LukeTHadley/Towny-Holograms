@@ -2,6 +2,7 @@ package com.github.lukethadley.townyholograms.commands.subcommands;
 
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
+import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
@@ -15,13 +16,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.w3c.dom.Text;
 
 public class info extends SubCommand {
 
     public info() {
         super("info", "Get information on a specific hologram in your town");
-        setPermission(Strings.REGULAR_PERM + "info");
+        setPermission(Permission.INFO);
     }
 
     @Override

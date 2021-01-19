@@ -2,6 +2,7 @@ package com.github.lukethadley.townyholograms.commands.subcommands;
 
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
+import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
@@ -16,16 +17,13 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
-import java.util.Locale;
 
 public class move extends SubCommand {
 
     public move(){
         super("move", "Moves a hologram to a given position in the town");
-        setPermission(Strings.REGULAR_PERM + "move");
+        setPermission(Permission.MOVE);
     }
 
     @Override

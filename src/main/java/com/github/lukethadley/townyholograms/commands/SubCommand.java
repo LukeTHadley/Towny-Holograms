@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 public abstract class SubCommand {
 
     private String name;
-    private String permission;
+    private Permission permission;
     private String[] aliases;
     private String description;
     private int argumentCount;
@@ -42,17 +42,17 @@ public abstract class SubCommand {
         }
     }
 
-    public void setPermission(String permission){
+    public void setPermission(Permission permission){
         this.permission = permission;
     }
 
-    public String getPermission(){
+    public Permission getPermission(){
         return permission;
     }
 
     public final boolean hasPermission(CommandSender sender) {
         if (permission == null) return true;
-        return sender.hasPermission(permission);
+        return sender.hasPermission(permission.toString());
     }
 
     public abstract String getPossibleArguments();

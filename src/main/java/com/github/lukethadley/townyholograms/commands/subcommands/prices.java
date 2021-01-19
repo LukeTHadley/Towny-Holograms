@@ -1,7 +1,7 @@
 package com.github.lukethadley.townyholograms.commands.subcommands;
 
-import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
+import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.HologramAllowance;
@@ -17,7 +17,7 @@ public class prices extends SubCommand {
 
     public prices(){
         super("prices", "Shows the prices and levels of holograms.", new String[]{"guide", "wiki"});
-        setPermission(Strings.REGULAR_PERM + "prices");
+        setPermission(Permission.PRICES);
     }
 
     @Override

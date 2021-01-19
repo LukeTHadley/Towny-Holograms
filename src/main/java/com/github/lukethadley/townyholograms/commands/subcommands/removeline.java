@@ -2,6 +2,7 @@ package com.github.lukethadley.townyholograms.commands.subcommands;
 
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
+import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
@@ -9,14 +10,13 @@ import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import java.util.ArrayList;
 
 public class removeline extends SubCommand {
 
     public removeline(){
         super("removeline", "Remove a line from a given hologram", new String[]{"delline", "deleteline"});
-        setPermission(Strings.REGULAR_PERM + "removeline");
+        setPermission(Permission.REMOVE_LINE);
     }
 
     @Override

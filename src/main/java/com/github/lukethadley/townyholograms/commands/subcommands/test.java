@@ -1,15 +1,10 @@
 package com.github.lukethadley.townyholograms.commands.subcommands;
 
-import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
+import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection;
-import com.palmergames.bukkit.towny.TownyAPI;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
-import com.palmergames.bukkit.towny.object.Resident;
-import com.palmergames.bukkit.towny.object.Town;
-import org.bukkit.Location;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -37,6 +32,10 @@ public class test extends SubCommand {
 
         Player player = (Player) sender;
 
+        sender.sendMessage(Permission.CREATE.toString());
+
+
+        /*
         try {
             if (TownyAPI.getInstance().isWilderness(player.getLocation())) {
                 System.out.println("WHILD");
@@ -69,7 +68,7 @@ public class test extends SubCommand {
             e.printStackTrace();
         }
 
-        /*
+
         if (TownyAPI.getInstance().isWilderness(player.getLocation())) {
             sender.sendMessage(Strings.DISPLAY_PREFIX + " You can not move a hologram wilderness.");
             return;

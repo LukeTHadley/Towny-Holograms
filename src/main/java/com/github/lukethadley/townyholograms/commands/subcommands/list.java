@@ -1,7 +1,7 @@
 package com.github.lukethadley.townyholograms.commands.subcommands;
 
-import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
+import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.HologramAllowance;
@@ -13,15 +13,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import java.util.ArrayList;
 
 public class list extends SubCommand {
 
-
     public list() {
         super("list", "Show a list of all holograms in your town");
-        setPermission(Strings.REGULAR_PERM + "list");
+        setPermission(Permission.LIST);
     }
 
     @Override

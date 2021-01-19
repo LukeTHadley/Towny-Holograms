@@ -2,6 +2,7 @@ package com.github.lukethadley.townyholograms.commands.subcommands;
 
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
+import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
@@ -17,7 +18,7 @@ public class insertline extends SubCommand {
 
     public insertline(){
         super("insertline", "Insert a line into an existing hologram");
-        setPermission(Strings.REGULAR_PERM + "insert");
+        setPermission(Permission.INSERT_LINE);
     }
 
     @Override

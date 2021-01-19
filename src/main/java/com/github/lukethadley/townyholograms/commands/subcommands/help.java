@@ -1,7 +1,7 @@
 package com.github.lukethadley.townyholograms.commands.subcommands;
 
-import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
+import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection;
@@ -17,7 +17,7 @@ public class help extends SubCommand {
 
     public help(){
         super("help", "Show a list of all plugin commands.", new String[]{"?"});
-        setPermission(Strings.REGULAR_PERM + "help");
+        setPermission(Permission.HELP);
     }
 
     public void setSubCommands(List<SubCommand> cmds){

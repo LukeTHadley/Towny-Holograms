@@ -2,6 +2,7 @@ package com.github.lukethadley.townyholograms.commands.subcommands;
 
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
+import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
@@ -15,10 +16,9 @@ import java.util.ArrayList;
 
 public class setline extends SubCommand {
 
-
     public setline(){
         super("setline", "Set the content of an existing line");
-        setPermission(Strings.REGULAR_PERM + "setline");
+        setPermission(Permission.SET_LINE);
     }
 
     @Override
