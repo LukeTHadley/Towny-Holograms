@@ -1,4 +1,4 @@
-package com.github.lukethadley.townyholograms.commands.subcommands;
+package com.github.lukethadley.townyholograms.commands.subcommands.general;
 
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
@@ -22,9 +22,9 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class create extends SubCommand {
+public class GeneralCreate extends SubCommand {
 
-    public create(){
+    public GeneralCreate(){
         super("create", "Make a new hologram in your town", new String[]{"new"});
         setPermission(Permission.CREATE);
     }

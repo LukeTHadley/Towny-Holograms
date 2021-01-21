@@ -1,18 +1,24 @@
-package com.github.lukethadley.townyholograms.commands.subcommands;
+package com.github.lukethadley.townyholograms.commands.subcommands.general;
 
 import com.github.lukethadley.townyholograms.TownyHolograms;
 import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection;
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.TownyMessaging;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Town;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 
-public class test extends SubCommand {
+public class GeneralTest extends SubCommand {
 
-    public test() {
+    public GeneralTest() {
         super("test", "A test command");
     }
 

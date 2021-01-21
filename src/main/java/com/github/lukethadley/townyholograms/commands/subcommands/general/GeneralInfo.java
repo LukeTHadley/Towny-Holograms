@@ -1,4 +1,4 @@
-package com.github.lukethadley.townyholograms.commands.subcommands;
+package com.github.lukethadley.townyholograms.commands.subcommands.general;
 
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
@@ -17,9 +17,9 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class info extends SubCommand {
+public class GeneralInfo extends SubCommand {
 
-    public info() {
+    public GeneralInfo() {
         super("info", "Get information on a specific hologram in your town");
         setPermission(Permission.INFO);
     }

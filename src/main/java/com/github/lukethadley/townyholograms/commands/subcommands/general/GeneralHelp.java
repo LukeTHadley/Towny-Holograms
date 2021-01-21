@@ -1,4 +1,4 @@
-package com.github.lukethadley.townyholograms.commands.subcommands;
+package com.github.lukethadley.townyholograms.commands.subcommands.general;
 
 import com.github.lukethadley.townyholograms.TownyHolograms;
 import com.github.lukethadley.townyholograms.commands.Permission;
@@ -11,11 +11,11 @@ import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
-public class help extends SubCommand {
+public class GeneralHelp extends SubCommand {
 
     private List<SubCommand> subCommands;
 
-    public help(){
+    public GeneralHelp(){
         super("help", "Show a list of all plugin commands.", new String[]{"?"});
         setPermission(Permission.HELP);
     }

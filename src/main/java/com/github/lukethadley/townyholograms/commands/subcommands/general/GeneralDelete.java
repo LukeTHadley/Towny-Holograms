@@ -1,4 +1,4 @@
-package com.github.lukethadley.townyholograms.commands.subcommands;
+package com.github.lukethadley.townyholograms.commands.subcommands.general;
 
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
@@ -11,9 +11,9 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class delete extends SubCommand {
+public class GeneralDelete extends SubCommand {
 
-    public delete() {
+    public GeneralDelete() {
         super("delete", "Delete a hologram in your town", new String[]{"remove", "del"});
         setPermission(Permission.DELETE);
     }

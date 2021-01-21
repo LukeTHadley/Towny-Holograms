@@ -1,4 +1,4 @@
-package com.github.lukethadley.townyholograms.commands.subcommands;
+package com.github.lukethadley.townyholograms.commands.subcommands.general;
 
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
@@ -19,9 +19,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import java.text.DecimalFormat;
 
-public class move extends SubCommand {
+public class GeneralMove extends SubCommand {
 
-    public move(){
+    public GeneralMove(){
         super("move", "Moves a hologram to a given position in the town");
         setPermission(Permission.MOVE);
     }

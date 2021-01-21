@@ -13,7 +13,9 @@ public enum Permission {
     MOVE ("townyholograms.commands.move"),
     PRICES ("townyholograms.commands.prices"),
     REMOVE_LINE ("townyholograms.commands.removeline"),
-    SET_LINE ("townyholograms.commands.setline");
+    SET_LINE ("townyholograms.commands.setline"),
+    //Administrator Permissions
+    ADMIN_HELP("townyholograms.admin.help");
 
     private String node;
 

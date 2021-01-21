@@ -1,4 +1,4 @@
-package com.github.lukethadley.townyholograms.commands.subcommands;
+package com.github.lukethadley.townyholograms.commands.subcommands.general;
 
 import com.github.lukethadley.townyholograms.TownyHolograms;
 import com.github.lukethadley.townyholograms.commands.Permission;
@@ -15,9 +15,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import java.util.ArrayList;
 
-public class list extends SubCommand {
+public class GeneralList extends SubCommand {
 
-    public list() {
+    public GeneralList() {
         super("list", "Show a list of all holograms in your town");
         setPermission(Permission.LIST);
     }

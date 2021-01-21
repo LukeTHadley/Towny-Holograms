@@ -1,4 +1,4 @@
-package com.github.lukethadley.townyholograms.commands.subcommands;
+package com.github.lukethadley.townyholograms.commands.subcommands.general;
 
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.TownyHolograms;
@@ -14,9 +14,9 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class setline extends SubCommand {
+public class GeneralSetLine extends SubCommand {
 
-    public setline(){
+    public GeneralSetLine(){
         super("setline", "Set the content of an existing line");
         setPermission(Permission.SET_LINE);
     }

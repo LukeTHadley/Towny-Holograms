@@ -1,4 +1,4 @@
-package com.github.lukethadley.townyholograms.commands.subcommands;
+package com.github.lukethadley.townyholograms.commands.subcommands.general;
 
 import com.github.lukethadley.townyholograms.TownyHolograms;
 import com.github.lukethadley.townyholograms.commands.Permission;
@@ -13,9 +13,9 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class prices extends SubCommand {
+public class GeneralPrices extends SubCommand {
 
-    public prices(){
+    public GeneralPrices(){
         super("prices", "Shows the prices and levels of holograms.", new String[]{"guide", "wiki"});
         setPermission(Permission.PRICES);
     }

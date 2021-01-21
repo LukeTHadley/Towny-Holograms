@@ -28,3 +28,21 @@ hologram-allowances:
   - [1, 2]
   - [2, 3]
   - [10, 15]
+
+
+
+
+object:
+  - allowance:
+      residents: 1
+      max-number: 6
+      hologram-cost: 400
+      line-limit: 4
+      line-cost: 100
+  - allowance:
+      residents: 2
+      max-number: 10
+      hologram-cost: 100
+      line-limit: 6
+      line-cost: 10
+
