@@ -56,7 +56,7 @@ public class GeneralPrices extends SubCommand {
             sender.sendMessage(ChatColor.YELLOW + " [Other Information] ");
             sender.sendMessage(ChatColor.DARK_GREEN + "          Holograms in a town will be deleted if a town falls.");
             sender.sendMessage(ChatColor.DARK_GREEN + "          Holograms in a chunk will be deleted if unclaimed.");
-            if (configValues.getClearHologramsOnPlotClear()){
+            if (configValues.getPlotClearSetting()){
                 sender.sendMessage(ChatColor.DARK_GREEN + "          Holograms in a chunk will be deleted on " + ChatColor.GREEN + "/plot clear" + ChatColor.DARK_GREEN + ".");
             } else{
                 sender.sendMessage(ChatColor.DARK_GREEN + "          Holograms in a chunk will not be deleted on " + ChatColor.GREEN + "/plot clear" + ChatColor.DARK_GREEN + ".");

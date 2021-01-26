@@ -79,7 +79,7 @@ public class TownyEventListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     private void onPlotClearEvent(PlotClearEvent e) {
 
-        if (configValues.getClearHologramsOnPlotClear()){
+        if (configValues.getPlotClearSetting()){
             try {
                 int plotX = e.getTownBlock().getX();
                 int plotZ = e.getTownBlock().getZ();

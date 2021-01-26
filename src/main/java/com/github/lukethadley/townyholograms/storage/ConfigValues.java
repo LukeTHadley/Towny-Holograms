@@ -66,11 +66,6 @@ public class ConfigValues {
         }
     }
 
-    public boolean getClearHologramsOnPlotClear() {
-        return true;
-    }
-
-
     /**
      * Returns the SQLCredentials object containing credentials to login to the database
      *
