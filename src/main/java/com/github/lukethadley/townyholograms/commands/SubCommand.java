@@ -13,16 +13,19 @@ public abstract class SubCommand {
     private String[] aliases;
     private String description;
     private int argumentCount;
+    private boolean consoleCommand;
 
     public SubCommand(String name, String description){
         this.name = name;
         this.description = description;
+        this.consoleCommand = false;
     }
 
     public SubCommand(String name, String description, String[] aliases){
         this.name = name;
         this.description = description;
         this.aliases = aliases;
+        this.consoleCommand = false;
     }
 
     public String getDescription(){
@@ -54,6 +57,10 @@ public abstract class SubCommand {
         if (permission == null) return true;
         return sender.hasPermission(permission.toString());
     }
+
+    public void setConsoleCommand(boolean isConsoleCommand){ consoleCommand = isConsoleCommand; }
+
+    public boolean getConsoleCommand(){ return consoleCommand; }
 
     public abstract String getPossibleArguments();
 

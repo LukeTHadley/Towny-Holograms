@@ -13,7 +13,7 @@ public class AdminHelp extends SubCommand {
     public AdminHelp(){
         super("help", "Admin help command.");
         setPermission(Permission.ADMIN_HELP);
-
+        setConsoleCommand(true);
     }
 
     @Override

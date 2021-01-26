@@ -22,6 +22,7 @@ public class AdminDatabaseDump extends SubCommand {
     public AdminDatabaseDump(){
         super("databasedump", "Outputs all records in the database table to a '.csv' file in the plugin directory.", new String[]{"dbdump"});
         setPermission(Permission.ADMIN_DATABASE_DUMP);
+        setConsoleCommand(true);
     }
 
     @Override

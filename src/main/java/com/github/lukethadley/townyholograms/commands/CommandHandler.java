@@ -62,21 +62,20 @@ public class CommandHandler implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender instanceof Player){ //Check that the sender was a player
+        //No arguments, display the general Towny Hologram information screen
+        if (args.length == 0) {
+            sender.sendMessage(ChatColor.GOLD + ".oOo._________.[" + ChatColor.YELLOW + " Towny Hologram " + ChatColor.GOLD + "]._________.oOo.");
+            sender.sendMessage(ChatColor.DARK_GREEN + "Version: '" + ChatColor.GREEN + plugin.getDescription().getVersion() + ChatColor.DARK_GREEN + "'" + ChatColor.GRAY + " | " + ChatColor.DARK_GREEN + "Authors: " + ChatColor.GREEN + plugin.getDescription().getAuthors().toString());
+            sender.sendMessage(ChatColor.RED + "Town Workers:" + ChatColor.DARK_AQUA + " /" + label + " help" + ChatColor.AQUA + " Show a list of usable commands.");
+            sender.sendMessage(ChatColor.RED + "Admin:" + ChatColor.DARK_AQUA + " /" + label + " admin" + ChatColor.AQUA + " Show a list of admin commands.");
+            return true;
+        }
+
+        if (sender instanceof Player) { //Check that the sender was a player
             Player player = (Player) sender;
 
-            //No arguments, display the general Towny Hologram information screen
-            if (args.length == 0) {
-                sender.sendMessage(ChatColor.GOLD + ".oOo._________.[" + ChatColor.YELLOW + " Towny Hologram " + ChatColor.GOLD + "]._________.oOo.");
-                sender.sendMessage(ChatColor.DARK_GREEN + "Version: '" + ChatColor.GREEN + plugin.getDescription().getVersion() + ChatColor.DARK_GREEN + "'" + ChatColor.GRAY + " | " + ChatColor.DARK_GREEN + "Authors: " + ChatColor.GREEN + plugin.getDescription().getAuthors().toString());
-                sender.sendMessage(ChatColor.RED + "Town Workers:" + ChatColor.DARK_AQUA + " /" + label +  " help" + ChatColor.AQUA + " Show a list of usable commands.");
-                sender.sendMessage(ChatColor.RED + "Admin:" + ChatColor.DARK_AQUA + " /" + label + " admin" + ChatColor.AQUA + " Show a list of admin commands.");
-
-                return true;
-            }
-
             //Did the sender request to use an admin command
-            if (args[0].equalsIgnoreCase("a") || args[0].equalsIgnoreCase("admin") || args[0].equalsIgnoreCase("administrator")){
+            if (args[0].equalsIgnoreCase("a") || args[0].equalsIgnoreCase("admin") || args[0].equalsIgnoreCase("administrator")) {
                 if (args.length > 1) {
                     for (SubCommand subCommand : adminCommands) {
                         if (subCommand.isValidTrigger(args[1])) {
@@ -133,14 +132,51 @@ public class CommandHandler implements TabExecutor {
             }
             sender.sendMessage(Strings.DISPLAY_PREFIX + ChatColor.RED + " Unknown Command, please do /" + label + " help for a list of all commands and usage.");
 
-        }
-        else{
-            sender.sendMessage(Strings.DISPLAY_PREFIX + " Hello Console!");
-        }
+        } else {
 
+            //Check if the sender requested to use a general command
+            for (SubCommand subCommand : subCommands) {
+                if (subCommand.isValidTrigger(args[0])) {
+                    sender.sendMessage(Strings.DISPLAY_PREFIX + ChatColor.RED + " You can't use general commands as console.");
+                    return false;
+                }
+            }
+
+            //Did the sender request to use an admin command
+            if (args[0].equalsIgnoreCase("a") || args[0].equalsIgnoreCase("admin") || args[0].equalsIgnoreCase("administrator")) {
+                if (args.length > 1) {
+                    for (SubCommand subCommand : adminCommands) {
+                        if (subCommand.isValidTrigger(args[1])) {
+                            if (subCommand.getConsoleCommand()) {
+                                if (args.length - 2 >= subCommand.getMinimumArguments()) {
+                                    try {
+                                        subCommand.execute(plugin, sender, label, Arrays.copyOfRange(args, 2, args.length), configValues, databaseConnection);
+                                        return false;
+                                    } catch (CommandException e) {
+                                        sender.sendMessage(e.getMessage());
+                                    }
+                                } else {
+                                    sender.sendMessage(Strings.DISPLAY_PREFIX + " Usage: /" + label + " " + args[0] + " " + subCommand.getName() + " " + subCommand.getPossibleArguments());
+                                    return true;
+                                }
+                                return true;
+                            } else {
+                                sender.sendMessage(Strings.DISPLAY_PREFIX + ChatColor.RED + " You can't use that command as console.");
+                                return false;
+                            }
+                        }
+                    }
+                }
+                sender.sendMessage(Strings.DISPLAY_PREFIX + ChatColor.RED + " Unknown Admin Command, please do /" + label + " " + args[0] + " help for a list of all commands and usage.");
+                return true;
+            }
+            else {
+                sender.sendMessage(Strings.DISPLAY_PREFIX + ChatColor.RED + " Unknown Command, please do /" + label + " admin help for a list of all commands and usage.");
+            }
+        }
         return false;
-    }
 
+    }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
@@ -164,9 +200,5 @@ public class CommandHandler implements TabExecutor {
 
         return suggestions;
     }
-
-
-
-
 
 }
