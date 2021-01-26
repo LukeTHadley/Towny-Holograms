@@ -62,9 +62,8 @@ public class CommandHandler implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        Player player = (Player) sender;
-
         if (sender instanceof Player){ //Check that the sender was a player
+            Player player = (Player) sender;
 
             //No arguments, display the general Towny Hologram information screen
             if (args.length == 0) {
@@ -135,7 +134,7 @@ public class CommandHandler implements TabExecutor {
             sender.sendMessage(Strings.DISPLAY_PREFIX + ChatColor.RED + " Unknown Command, please do /" + label + " help for a list of all commands and usage.");
 
         }
-        else { //Console was the sender
+        else{
             sender.sendMessage(Strings.DISPLAY_PREFIX + " Hello Console!");
         }
 
