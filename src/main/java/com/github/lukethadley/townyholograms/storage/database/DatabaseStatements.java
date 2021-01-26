@@ -22,6 +22,8 @@ public class DatabaseStatements {
 
     public static final String DATABASE_REMOVE_ALL_TOWN_RECORDS = "DELETE FROM townyHologramsStorage WHERE town = ?;";
 
+    public static final String DATABASE_QUEARY_ALL_RECORDS = "SELECT * FROM `townyHologramsStorage`;";
+
 
 
 
