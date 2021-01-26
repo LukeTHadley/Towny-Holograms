@@ -4,6 +4,7 @@ package com.github.lukethadley.townyholograms.storage.database;
 import com.github.lukethadley.townyholograms.Strings;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
+import com.github.lukethadley.townyholograms.storage.SQLCredentials;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
 import org.bukkit.Bukkit;
@@ -16,21 +17,11 @@ import java.util.UUID;
 
 public class DatabaseConnection {
 
-    public ConfigValues configValues;
-
-    private String username;
-    private String password;
-    private String url;
-
-
-    //Connection vars
+    private SQLCredentials sqlCredentials;
     static Connection connection; //This is the variable we will use to connect to database
 
-    public DatabaseConnection(ConfigValues configValues) {
-        this.configValues = configValues;
-        username = configValues.getSQLUsername();
-        password = configValues.getSQLPassword();
-        url = "jdbc:mysql://" + configValues.getSQLHost() + ":" + configValues.getSQLPort() + "/" + configValues.getSQLDatabaseName();
+    public DatabaseConnection(SQLCredentials sqlCredentials) {
+        this.sqlCredentials = sqlCredentials;
     }
 
 
@@ -68,7 +59,7 @@ public class DatabaseConnection {
             return false;
         }
         try { //Another try catch to get any SQL errors (for example connections errors)
-            connection = DriverManager.getConnection(url, username, password);
+            connection = DriverManager.getConnection(sqlCredentials.getUrl(), sqlCredentials.getUsername(), sqlCredentials.getPassword());
             //with the method getConnection() from DriverManager, we're trying to set
             //the connection's url, username, password to the variables we made earlier and
             //trying to get a connection at the same time. JDBC allows us to do this.

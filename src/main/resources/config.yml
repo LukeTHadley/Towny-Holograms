@@ -5,44 +5,37 @@
 ##########################
 
 
-#Add your SQL connection credentials below.
-#The plugin will not enable unless a successful SQL connection is found
+# Add your SQL connection credentials below.
+# The plugin will not enable unless a successful SQL connection is found.
 sql-database:
   host: ""
-  port: 3306
+  port: 3306    # Can be removed or left blank (will be defaulted to 3306)
   database-name: ""
   username: ""
   password: ""
 
-# Should holograms in a plot be cleared when a user runs '/plot clear'
+# Should holograms in a plot be cleared when a user runs '/plot clear'.
 ClearHologramsOnPlotClear: false
 
-# The price of a new hologram taken out of the town bank
-NewHologramPrice: 10000
-
-# The number of residents to the number of holograms allowed.
-# [1, 2] - If there is one resident in the town, the town is allowed 2 holograms
-# [2, 7] - If there are 2 residents in the town, the town is allowed 7 holograms...
-# Add more in the format below depending on your server.
-hologram-allowances:
-  - [1, 2]
-  - [2, 3]
-  - [10, 15]
-
-
-
-
-object:
+## Here you can modify the hologram prices and allowances.
+## To add more settings, copy the following format. Each allowance must have.
+## The 'residents' value must be unique for each allowance. The value represents how many players must be in a town to qualify for that level of prices/quantities.
+###   - allowance:
+###       residents: //The number of residents in a town to qualify for this level. (Must be > 1 and differ from another allowance)
+###       max_number: //The maximum number of holograms allowed to be created in the town. (Must be > 1)
+###       hologram_cost: //The cost for each hologram. (0 if no cost)
+###       line_limit: //The number of lines allowed to be added to the holograms. (0 if no line limit)
+###       line_cost: //The cost of adding another line to an existing hologram. (0 if no per-line cost)
+hologram-settings:
   - allowance:
       residents: 1
-      max-number: 6
-      hologram-cost: 400
-      line-limit: 4
-      line-cost: 100
+      max_number: 6
+      hologram_cost: 400
+      line_limit: 4
+      line_cost: 100
   - allowance:
       residents: 2
-      max-number: 10
-      hologram-cost: 100
-      line-limit: 6
-      line-cost: 10
-
+      max_number: 10
+      hologram_cost: 100
+      line_limit: 6
+      line_cost: 10

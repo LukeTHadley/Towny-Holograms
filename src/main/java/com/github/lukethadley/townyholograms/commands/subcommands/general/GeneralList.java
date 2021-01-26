@@ -4,7 +4,6 @@ import com.github.lukethadley.townyholograms.TownyHolograms;
 import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
-import com.github.lukethadley.townyholograms.storage.HologramAllowance;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection;
 import com.palmergames.bukkit.towny.TownyAPI;
@@ -46,15 +45,9 @@ public class GeneralList extends SubCommand {
             }
 
             int townResidentCount = TownyAPI.getInstance().getTownBlock(player.getLocation()).getTown().getNumResidents();
-            HologramAllowance closest = new HologramAllowance(0, 0);
-            for (HologramAllowance allowance : plugin.prices) {
 
-                if (allowance.getNumberOfResidents() <= townResidentCount && allowance.getNumberOfResidents() > closest.getNumberOfResidents()) {
-                    closest = allowance;
-                }
-            }
 
-            sender.sendMessage(ChatColor.DARK_GREEN + "Your town is using " + ChatColor.GREEN + holograms.size() + ChatColor.DARK_GREEN + "/" + ChatColor.GREEN + closest.getNumberOfHolograms() + ChatColor.DARK_GREEN + " allowed holograms.");
+            sender.sendMessage(ChatColor.DARK_GREEN + "Your town is using " + ChatColor.GREEN + holograms.size() + ChatColor.DARK_GREEN + "/" + ChatColor.GREEN + configValues.getClosestAllowance(townResidentCount).getMaxNumber() + ChatColor.DARK_GREEN + " allowed holograms.");
             for (HologramItem hologram : holograms) {
                 sender.sendMessage(" " + ChatColor.DARK_AQUA + hologram.getName() + ChatColor.GRAY + " - " + ChatColor.AQUA + hologram.getLocation().getWorld().getName() + " X:" + String.format("%.03f", hologram.getLocation().getX()) + " Y:" + String.format("%.03f", hologram.getLocation().getY()) + " Z:" + String.format("%.03f", hologram.getLocation().getZ()));
             }

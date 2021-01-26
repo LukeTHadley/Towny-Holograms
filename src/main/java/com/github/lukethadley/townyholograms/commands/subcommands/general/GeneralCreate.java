@@ -5,6 +5,7 @@ import com.github.lukethadley.townyholograms.TownyHolograms;
 import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
+import com.github.lukethadley.townyholograms.storage.HologramAllowance;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
@@ -53,15 +54,16 @@ public class GeneralCreate extends SubCommand {
         try {
             Resident resident = TownyAPI.getInstance().getDataSource().getResident(player.getName());
             Town town = TownyAPI.getInstance().getTownBlock(player.getLocation()).getTown();
+            HologramAllowance allowance = configValues.getClosestAllowance(town.getNumResidents());
 
             if (resident.getTown().equals(town)) { //Player is in their town
 
                 String hologramName = args[0];
 
-                if ( town.getAccount().getHoldingBalance() < configValues.getNewHologramPrice()){
+                if ( town.getAccount().getHoldingBalance() < allowance.getHologramCost()){
                     sender.sendMessage(Strings.DISPLAY_PREFIX + " You don't have enough funds in the town bank for a hologram.");
                 } else {
-                    town.getAccount().withdraw(configValues.getNewHologramPrice(), "TownyHologram - Creation of hologram " + hologramName);
+                    town.getAccount().withdraw(allowance.getHologramCost(), "TownyHologram - Creation of hologram " + hologramName);
 
 
                     HologramItem getHologram = databaseConnection.getHologram(hologramName, town.getUuid().toString());
@@ -80,7 +82,8 @@ public class GeneralCreate extends SubCommand {
                         hologramCount = items.size();
                     }
 
-                    if (hologramCount >= plugin.getHologramAllowance(town).getNumberOfHolograms()){
+
+                    if (hologramCount >= allowance.getMaxNumber()){
                         sender.sendMessage(Strings.DISPLAY_PREFIX + " You can't have any more holograms at your current town size.");
                         return;
                     }
@@ -113,7 +116,7 @@ public class GeneralCreate extends SubCommand {
                     plugin.addHologram(newHologram);
 
 
-                    sender.sendMessage(Strings.DISPLAY_PREFIX + " Creating new hologram '" + hologramName + "' in " + plugin.getTownFromPlayer(player).getName() + " with text '" + formattedHologramText + ChatColor.AQUA + "' for " + configValues.getNewHologramPrice() + ".");
+                    sender.sendMessage(Strings.DISPLAY_PREFIX + " Creating new hologram '" + hologramName + "' in " + plugin.getTownFromPlayer(player).getName() + " with text '" + formattedHologramText + ChatColor.AQUA + "' for " + allowance.getHologramCost() + ".");
                 }
             }
             else {

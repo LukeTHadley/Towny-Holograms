@@ -3,7 +3,6 @@ package com.github.lukethadley.townyholograms;
 import com.github.lukethadley.townyholograms.commands.CommandHandler;
 
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
-import com.github.lukethadley.townyholograms.storage.HologramAllowance;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseStatements;
@@ -27,15 +26,13 @@ public final class TownyHolograms extends JavaPlugin {
     private DatabaseConnection databaseConnection;
 
     public Map<UUID, ArrayList<HologramItem>> holograms;
-    public List<HologramAllowance> prices;
 
     @Override
     public void onEnable() {
         configurationValues = new ConfigValues(this);
-        databaseConnection = new DatabaseConnection(configurationValues);
+        databaseConnection = new DatabaseConnection(configurationValues.getSqlCredentials());
 
         saveDefaultConfig();
-        prices = configurationValues.getHologramAllowances();
 
 
         if (!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays") || !Bukkit.getPluginManager().isPluginEnabled("Towny")) {
@@ -190,19 +187,6 @@ public final class TownyHolograms extends JavaPlugin {
         }
         return counter;
     }
-
-    public HologramAllowance getHologramAllowance(Town town){
-            HologramAllowance closest = new HologramAllowance(0, 0);
-            for (HologramAllowance allowance : prices){
-                if (allowance.getNumberOfResidents() <= town.getNumResidents() && allowance.getNumberOfResidents() > closest.getNumberOfResidents()){
-                    closest = allowance;
-                }
-            }
-            return closest;
-    }
-
-
-
 
 
 }
