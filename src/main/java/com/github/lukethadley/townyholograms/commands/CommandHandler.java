@@ -67,6 +67,7 @@ public class CommandHandler implements TabExecutor {
         if (args.length == 0) {
             sender.sendMessage(ChatColor.GOLD + ".oOo._________.[" + ChatColor.YELLOW + " Towny Hologram " + ChatColor.GOLD + "]._________.oOo.");
             sender.sendMessage(ChatColor.DARK_GREEN + "Version: '" + ChatColor.GREEN + plugin.getDescription().getVersion() + ChatColor.DARK_GREEN + "'" + ChatColor.GRAY + " | " + ChatColor.DARK_GREEN + "Authors: " + ChatColor.GREEN + plugin.getDescription().getAuthors().toString());
+            sender.sendMessage(ChatColor.DARK_GREEN + "Total Active Towny Holograms: " + ChatColor.GREEN + plugin.getTotalHolograms());
             sender.sendMessage(ChatColor.RED + "Town Workers:" + ChatColor.DARK_AQUA + " /" + label + " help" + ChatColor.AQUA + " Show a list of usable commands.");
             sender.sendMessage(ChatColor.RED + "Admin:" + ChatColor.DARK_AQUA + " /" + label + " admin" + ChatColor.AQUA + " Show a list of admin commands.");
             return true;
