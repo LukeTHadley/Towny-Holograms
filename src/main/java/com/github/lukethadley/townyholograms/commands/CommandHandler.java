@@ -184,6 +184,21 @@ public class CommandHandler implements TabExecutor {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> suggestions = new ArrayList<>();
         try {
+            if (args.length > 1){
+                if (args[0].equals("a") || args[0].equals("admin") || args[0].equals("administrator")){
+                    for (SubCommand commandName : adminCommands) {
+                        for (String commandAlias : commandName.getAliases()){
+                            if (commandAlias.startsWith(args[1])){
+                                suggestions.add(commandAlias);
+                            }
+                        }
+                        if (commandName.getName().startsWith(args[1])) {
+                            suggestions.add(commandName.getName());
+                        }
+                    }
+                }
+                return suggestions;
+            }
             if (args.length == 1) {
                 for (SubCommand commandName : subCommands) {
                     for (String commandAlias : commandName.getAliases()){
@@ -194,12 +209,20 @@ public class CommandHandler implements TabExecutor {
                     if (commandName.getName().startsWith(args[0])) {
                         suggestions.add(commandName.getName());
                     }
+                    if ("a".startsWith(args[0])){
+                        suggestions.add("a");
+                    }
+                    if ("admin".startsWith(args[0])){
+                        suggestions.add("admin");
+                    }
+                    if ("administrator".startsWith(args[0])){
+                        suggestions.add("administrator");
+                    }
+
                 }
             }
         }
-        catch (IndexOutOfBoundsException e){
-        }
-
+        catch (IndexOutOfBoundsException e){ }
         return suggestions;
     }
 
