@@ -5,8 +5,13 @@ import com.github.lukethadley.townyholograms.TownyHolograms;
 import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
+import com.github.lukethadley.townyholograms.storage.HologramAllowance;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection;
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Town;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
@@ -38,6 +43,9 @@ public class GeneralInsertLine extends SubCommand {
             String hologramName = args[0];
             int lineIndex = Integer.parseInt(args[1])+1;
 
+            Town town = TownyAPI.getInstance().getTownBlock(player.getLocation()).getTown();
+            HologramAllowance allowance = configValues.getClosestAllowance(town.getNumResidents());
+
             HologramItem hologram = databaseConnection.getHologram(hologramName, plugin.getTownFromPlayer(player).getUuid().toString());
 
             if (hologram == null){
@@ -48,6 +56,19 @@ public class GeneralInsertLine extends SubCommand {
             if (lineIndex <= 0 || lineIndex > hologram.getLines().length){
                 sender.sendMessage(Strings.DISPLAY_PREFIX + " The index you gave was invalid for the hologram '" + hologramName + "', as it has only " + hologram.getLines().length + " lines");
                 return;
+            }
+
+            if (allowance == null){
+                sender.sendMessage(Strings.DISPLAY_PREFIX + " An allowance setting for your town size can not be found.");
+                return;
+            }
+
+
+            if (allowance.getLineLimit() != 0){
+                if (hologram.getLines().length >= allowance.getLineLimit()){
+                    sender.sendMessage(Strings.DISPLAY_PREFIX + " You can't add another line with your current hologram allowance.");
+                    return;
+                }
             }
 
             String hologramText = ChatColor.AQUA + "New Hologram!";
@@ -88,6 +109,9 @@ public class GeneralInsertLine extends SubCommand {
         }
         catch (NumberFormatException e){
             sender.sendMessage(Strings.DISPLAY_PREFIX + " Please enter a integer index, not a string.");
+        }
+        catch (NotRegisteredException e){
+            sender.sendMessage(Strings.DISPLAY_PREFIX + " An issue with towny occurred while inserting a line");
         }
 
 

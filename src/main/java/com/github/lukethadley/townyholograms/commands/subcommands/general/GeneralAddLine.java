@@ -5,8 +5,12 @@ import com.github.lukethadley.townyholograms.TownyHolograms;
 import com.github.lukethadley.townyholograms.commands.Permission;
 import com.github.lukethadley.townyholograms.commands.SubCommand;
 import com.github.lukethadley.townyholograms.storage.ConfigValues;
+import com.github.lukethadley.townyholograms.storage.HologramAllowance;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection;
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Town;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
@@ -34,47 +38,60 @@ public class GeneralAddLine extends SubCommand {
     @Override
     public void execute(TownyHolograms plugin, CommandSender sender, String label, String[] args, ConfigValues configValues, DatabaseConnection databaseConnection) throws CommandException {
 
-        Player player = (Player) sender;
-        String hologramName = args[0];
+        try {
+            Player player = (Player) sender;
+            String hologramName = args[0];
 
-        HologramItem hologram = databaseConnection.getHologram(hologramName, plugin.getTownFromPlayer(player).getUuid().toString());
+            HologramItem hologram = databaseConnection.getHologram(hologramName, plugin.getTownFromPlayer(player).getUuid().toString());
+            Town town = TownyAPI.getInstance().getTownBlock(player.getLocation()).getTown();
+            HologramAllowance allowance = configValues.getClosestAllowance(town.getNumResidents());
 
-        if (hologram == null){
-            sender.sendMessage(Strings.DISPLAY_PREFIX + " A hologram with the name '" + hologramName + "' does not exist!");
-            return;
-        }
-
-        String hologramText = ChatColor.AQUA + "New Hologram!";
-
-        if (args.length > 1){ //There is text in the argument to add to the hologram.
-            hologramText = "";
-            for(int i = 1; i < args.length; i++){
-                if(i == args.length-1){
-                    hologramText = hologramText + args[i];
-                }
-                else {
-                    hologramText = hologramText + args[i] + " ";
-                }
-            }
-        }
-        String formattedHologramText = ChatColor.translateAlternateColorCodes('&', hologramText);
-
-        int counter = 0;
-        ArrayList<HologramItem> hologramItems = plugin.holograms.get(hologram.getTownUUID());
-        for (HologramItem holo : hologramItems){
-            if (holo.getName().equals(hologram.getName()) && holo.getTown().equals(hologram.getTown())){
-
-                hologramItems.get(counter).addLine(formattedHologramText);
-                databaseConnection.updateContent(hologramItems.get(counter).linesToString(), hologramName, plugin.getTownFromPlayer(player).getUuid().toString());
-
-
-                sender.sendMessage(Strings.DISPLAY_PREFIX + " The content of hologram '" + hologramName + "' was updated!");
-                plugin.holograms.replace(hologram.getTownUUID(), hologramItems);
+            if (hologram == null) {
+                sender.sendMessage(Strings.DISPLAY_PREFIX + " A hologram with the name '" + hologramName + "' does not exist!");
                 return;
-
-
             }
-            counter++;
+
+
+            if (allowance.getLineLimit() != 0) {
+                if (hologram.getLines().length >= allowance.getLineLimit()) {
+                    sender.sendMessage(Strings.DISPLAY_PREFIX + " You can't add another line with your current hologram allowance.");
+                    return;
+                }
+            }
+
+            String hologramText = ChatColor.AQUA + "New Hologram!";
+
+            if (args.length > 1) { //There is text in the argument to add to the hologram.
+                hologramText = "";
+                for (int i = 1; i < args.length; i++) {
+                    if (i == args.length - 1) {
+                        hologramText = hologramText + args[i];
+                    } else {
+                        hologramText = hologramText + args[i] + " ";
+                    }
+                }
+            }
+            String formattedHologramText = ChatColor.translateAlternateColorCodes('&', hologramText);
+
+            int counter = 0;
+            ArrayList<HologramItem> hologramItems = plugin.holograms.get(hologram.getTownUUID());
+            for (HologramItem holo : hologramItems) {
+                if (holo.getName().equals(hologram.getName()) && holo.getTown().equals(hologram.getTown())) {
+
+                    hologramItems.get(counter).addLine(formattedHologramText);
+                    databaseConnection.updateContent(hologramItems.get(counter).linesToString(), hologramName, plugin.getTownFromPlayer(player).getUuid().toString());
+
+
+                    sender.sendMessage(Strings.DISPLAY_PREFIX + " The content of hologram '" + hologramName + "' was updated!");
+                    plugin.holograms.replace(hologram.getTownUUID(), hologramItems);
+                    return;
+
+
+                }
+                counter++;
+            }
+        } catch (NotRegisteredException exception) {
+            sender.sendMessage(Strings.DISPLAY_PREFIX + " An issue with towny occurred while inserting a line");
         }
 
 
