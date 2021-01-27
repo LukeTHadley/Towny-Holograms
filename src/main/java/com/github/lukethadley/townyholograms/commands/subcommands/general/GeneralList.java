@@ -8,10 +8,12 @@ import com.github.lukethadley.townyholograms.storage.HologramItem;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Town;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 
 public class GeneralList extends SubCommand {
@@ -36,16 +38,16 @@ public class GeneralList extends SubCommand {
         try {
 
             Player player = (Player) sender;
+            Town town = TownyAPI.getInstance().getTownBlock(player.getLocation()).getTown();
+            int townResidentCount = town.getNumResidents();
+            ArrayList<HologramItem> holograms = plugin.holograms.get(town.getUuid());
 
-            ArrayList<HologramItem> holograms = databaseConnection.getHolograms(plugin.getTownFromPlayer(player).getUuid().toString());
-            sender.sendMessage(ChatColor.GOLD + ".oOo.___________.[ " + ChatColor.YELLOW + plugin.getTownFromPlayer(player).getName() + " Holograms " + ChatColor.GOLD + "].___________.oOo.");
+            sender.sendMessage(ChatColor.GOLD + ".oOo.___________.[ " + ChatColor.YELLOW + town.getName() + " Holograms " + ChatColor.GOLD + "].___________.oOo.");
+
             if (holograms.size() == 0) {
                 sender.sendMessage(ChatColor.DARK_GREEN + "Your town has no holograms at the moment.");
                 return;
             }
-
-            int townResidentCount = TownyAPI.getInstance().getTownBlock(player.getLocation()).getTown().getNumResidents();
-
 
             sender.sendMessage(ChatColor.DARK_GREEN + "Your town is using " + ChatColor.GREEN + holograms.size() + ChatColor.DARK_GREEN + "/" + ChatColor.GREEN + configValues.getClosestAllowance(townResidentCount).getMaxNumber() + ChatColor.DARK_GREEN + " allowed holograms.");
             for (HologramItem hologram : holograms) {
@@ -53,6 +55,9 @@ public class GeneralList extends SubCommand {
             }
 
         } catch (NotRegisteredException e){
+            plugin.getLogger().warning("An issue occurred with towny listing town holograms.");
+        }
+        catch (NullPointerException e){
             plugin.getLogger().warning("An issue occurred while listing town holograms.");
         }
     }
