@@ -9,6 +9,7 @@ import com.github.lukethadley.townyholograms.storage.HologramAllowance;
 import com.github.lukethadley.townyholograms.storage.HologramItem;
 import com.github.lukethadley.townyholograms.storage.database.DatabaseConnection;
 import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
@@ -46,6 +47,7 @@ public class GeneralInsertLine extends SubCommand {
             Town town = TownyAPI.getInstance().getTownBlock(player.getLocation()).getTown();
             HologramAllowance allowance = configValues.getClosestAllowance(town.getNumResidents());
 
+
             HologramItem hologram = databaseConnection.getHologram(hologramName, plugin.getTownFromPlayer(player).getUuid().toString());
 
             if (hologram == null){
@@ -69,6 +71,13 @@ public class GeneralInsertLine extends SubCommand {
                     sender.sendMessage(Strings.DISPLAY_PREFIX + " You can't add another line with your current hologram allowance.");
                     return;
                 }
+            }
+
+            if ( town.getAccount().getHoldingBalance() < allowance.getLineCost()){
+                sender.sendMessage(Strings.DISPLAY_PREFIX + " You don't have enough funds in the town bank for another hologram line.");
+                return;
+            } else {
+                town.getAccount().withdraw(allowance.getLineCost(), "TownyHologram - Added a line to hologram " + hologramName);
             }
 
             String hologramText = ChatColor.AQUA + "New Hologram!";
@@ -96,7 +105,7 @@ public class GeneralInsertLine extends SubCommand {
                 if (holo.getName().equals(hologram.getName()) && holo.getTown().equals(hologram.getTown())){
                     townList.get(counter).insertLine(lineIndex-1, formattedHologramText);
                     databaseConnection.updateContent(townList.get(counter).linesToString(), hologramName, plugin.getTownFromPlayer(player).getUuid().toString());
-                    sender.sendMessage(Strings.DISPLAY_PREFIX + " The content of hologram '" + hologramName + "' was updated!");
+                    sender.sendMessage(Strings.DISPLAY_PREFIX + " The content of hologram '" + hologramName + "' was updated for the price of " + allowance.getLineCost() + "!");
                     plugin.holograms.replace(hologram.getTownUUID(), townList);
                     return;
                 }
@@ -111,7 +120,9 @@ public class GeneralInsertLine extends SubCommand {
             sender.sendMessage(Strings.DISPLAY_PREFIX + " Please enter a integer index, not a string.");
         }
         catch (NotRegisteredException e){
-            sender.sendMessage(Strings.DISPLAY_PREFIX + " An issue with towny occurred while inserting a line");
+            sender.sendMessage(Strings.DISPLAY_PREFIX + " An issue with towny occurred while inserting a line.");
+        } catch (EconomyException e) {
+            sender.sendMessage(Strings.DISPLAY_PREFIX + " An issue occurred with Towny while withdrawing money.");
         }
 
 
