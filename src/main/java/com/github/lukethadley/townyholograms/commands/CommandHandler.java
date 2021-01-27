@@ -33,6 +33,7 @@ public class CommandHandler implements TabExecutor {
         adminCommands = new ArrayList<>();
 
         GeneralHelp helpCommand = new GeneralHelp();
+        AdminHelp adminHelpCommand = new AdminHelp();
 
         subCommands.add(new GeneralCreate());
         subCommands.add(new GeneralDelete());
@@ -43,17 +44,16 @@ public class CommandHandler implements TabExecutor {
         subCommands.add(new GeneralSetLine());
         subCommands.add(new GeneralInsertLine());
         subCommands.add(new GeneralMove());
-
-        subCommands.add(helpCommand);
         subCommands.add(new GeneralPrices());
         subCommands.add(new GeneralTest());
+        subCommands.add(helpCommand);
 
-
-        adminCommands.add(new AdminHelp());
         adminCommands.add(new AdminDatabaseDump());
         adminCommands.add(new AdminListHolograms());
+        adminCommands.add(adminHelpCommand);
 
         helpCommand.setSubCommands(subCommands);
+        adminHelpCommand.setSubCommands(adminCommands);
     }
 
     public List<SubCommand> getSubCommands() {
