@@ -16,7 +16,8 @@ public enum Permission {
     SET_LINE ("townyholograms.commands.setline"),
     //Administrator Permissions
     ADMIN_HELP("townyholograms.admin.help"),
-    ADMIN_DATABASE_DUMP("townyholograms.admin.databasedump");
+    ADMIN_DATABASE_DUMP("townyholograms.admin.databasedump"),
+    ADMIN_LIST_HOLOGRAMS("townyholograms.admin.listholograms");
 
     private String node;
 

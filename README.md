@@ -61,8 +61,9 @@ Admins have separate permission nodes to be able to modify other towns holograms
 | Command                                              | Description                                | Permission                    | Can be executed in console    |
 | -----------------------------------------------------|:------------------------------------------:| -----------------------------:| -----------------------------:|
 | `/townyhologram admin help`                          | Displays all possible admin commands       | `townyhologram.admin.help`    | Yes                           |
-| `/townyhologram admin databasedump`                            | Outputs all records in the database table to a '.csv' file in the plugin directory.                                          | `townyhologram.admin.databasedump` | Yes                           |
-
+| `/townyhologram admin databasedump`                  | Outputs all records in the database table to a '.csv' file in the plugin directory.                                          | `townyhologram.admin.databasedump` | Yes                           |
+| `/townyhologram admin list`                          | Displays all Towns with towny holograms and how many they have | `townyhologram.admin.townyholograms.admin.listholograms`    | Yes                           |
+| `/townyhologram admin list <town name>`                          | Displays all holograms in that specific town and their locations | `townyhologram.admin.townyholograms.admin.listholograms`    | Yes                           |
 
 ---
 
