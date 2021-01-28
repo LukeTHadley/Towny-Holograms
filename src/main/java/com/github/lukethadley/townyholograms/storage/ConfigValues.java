@@ -57,9 +57,6 @@ public class ConfigValues {
                 HologramAllowance hologramAllowance = gson.fromJson(jsonToFormat, HologramAllowance.class);
                 hologramSettings.put(hologramAllowance.getResidents(), hologramAllowance);
             }
-            for (int key : hologramSettings.keySet()){
-                System.out.println(hologramSettings.get(key).toString());
-            }
         }
         catch (NullPointerException e){
             e.printStackTrace();
