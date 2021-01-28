@@ -50,6 +50,7 @@ public class CommandHandler implements TabExecutor {
 
         adminCommands.add(new AdminDatabaseDump());
         adminCommands.add(new AdminListHolograms());
+        adminCommands.add(new AdminTeleport());
         adminCommands.add(new AdminInfo());
         adminCommands.add(adminHelpCommand);
 
