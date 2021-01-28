@@ -89,46 +89,19 @@ public class GeneralInfo extends SubCommand {
         moveHereComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ("/townyhologram move " + hologramName)));
         moveHereComponent.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new ComponentBuilder( "Move a hologram to your current position" ).create() ) );
 
-        TextComponent teleportToComponent = new TextComponent(ChatColor.RED + " [Go To]");
-        teleportToComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ("/townyhologram teleport " + hologramName)));
-        teleportToComponent.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new ComponentBuilder( "Teleport to a specific hologram" ).create() ) );
-
         footer.addExtra(deleteComponent);
         footer.addExtra(removeLineComponent);
         footer.addExtra(addLineComponent);
         footer.addExtra(setLineComponent);
         footer.addExtra(moveHereComponent);
-        footer.addExtra(teleportToComponent);
-
 
         player.spigot().sendMessage(footer);
 
-
     }
-
-
+        
          catch (NotRegisteredException exception) {
             exception.printStackTrace();
         }
-
-        /*
-
-        TextComponent mainComponent = new TextComponent( "Here's a question: " );
-        mainComponent.setColor( ChatColor.GOLD.asBungee() );
-
-        TextComponent subComponent = new TextComponent( "Maybe u r noob?" );
-        subComponent.setColor( ChatColor.AQUA.asBungee() );
-
-        subComponent.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT, new ComponentBuilder( "Click me!" ).create() ) );
-        subComponent.setClickEvent( new ClickEvent( ClickEvent.Action.OPEN_URL, "https://www.spigotmc.org/wiki/the-chat-component-api/" ) );
-
-
-
-        mainComponent.addExtra( subComponent );
-        mainComponent.addExtra( " Does that answer your question?" );
-
-
-        player.spigot().sendMessage( mainComponent );*/
 
     }
 
